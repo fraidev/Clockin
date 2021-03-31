@@ -4,13 +4,13 @@
 
 ## How to use
 
-Add now as a work schedule
+Add now as a work schedule for today
 
 ```bash
 > clockin add -n
 ```
 
-Add some work schedule
+Add some work schedule for today
 
 ```bash
 > clockin add -t 12:15
