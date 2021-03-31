@@ -9,7 +9,7 @@ namespace Clockin.Models
     public record DataRoot
     {
         public int MaxLines { get; set; } = 10;
-        public IDictionary<DateTime, SortedSet<TimeSpan>> Shifts { get; set; } = new Dictionary<DateTime, SortedSet<TimeSpan>>();
+        public IDictionary<DateTime, SortedSet<TimeSpan>> Shifts { get; set; } = new SortedDictionary<DateTime, SortedSet<TimeSpan>>();
 
         public void PushShift(DateTime date, TimeSpan time)
         {

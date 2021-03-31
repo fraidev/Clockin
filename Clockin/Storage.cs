@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 using Clockin.JsonConverters;
 using Clockin.Models;
@@ -14,7 +15,7 @@ namespace Clockin
     public class Storage: IStorage
     {
         private readonly JsonSerializerOptions _serializerOptions;
-        private const string StorageFileName = "clockin.json";
+        private static readonly string StorageFileName = Path.GetDirectoryName(AppContext.BaseDirectory) + "\\clockin.json";
 
         public Storage()
         {
@@ -25,6 +26,7 @@ namespace Clockin
         
         public void Save(DataRoot dataRoot)
         {
+            Console.WriteLine(StorageFileName);
             File.WriteAllText(StorageFileName, JsonSerializer.Serialize(dataRoot, _serializerOptions));
         }
 
