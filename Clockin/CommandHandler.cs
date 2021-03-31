@@ -56,15 +56,20 @@ namespace Clockin
             return 0;
         }
 
-        public int ShowList()
+        public int ShowList(int count = 0)
         {
-            // Create a table
+            var dataRoot = _storage.Get();
+            if (count == 0)
+            {
+                count = dataRoot.MaxLines;
+            }
+            
             var table = new Table {Border = TableBorder.None};
             table.AddColumn("[yellow]Date[/]");
-            table.AddColumn("[yellow]Times[/]");
-            table.AddColumn("[yellow]Total[/]");
+            table.AddColumn("[yellow]Times[/]", x => x.Alignment = Justify.Center);
+            table.AddColumn("[yellow]Total[/]", x => x.Alignment = Justify.Right);
             
-            _storage.Get().FillTable(table);
+            dataRoot.FillTable(table, count);
             
             AnsiConsole.Render(table);
             

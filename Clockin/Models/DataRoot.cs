@@ -48,16 +48,16 @@ namespace Clockin.Models
             }
         }
         
-        public void FillTable(Table table)
+        public void FillTable(Table table, int count = 10)
         {
-            foreach (var (key, value) in Shifts.Take(10))
+            foreach (var (key, value) in Shifts.Reverse().Take(count))
             {
                 table.AddRow(@$"[#5B86B3]{key:d}[/]", @$"[#A57EA8]{GetTimes(value)}[/]", @$"[#048479]{Total(value)}[/]");
             }
         }
 
         private static string GetTimes(IEnumerable<TimeSpan> shifts) =>
-            string.Join(" [yellow]|[/] ", shifts.GetSlices(2).Select(shift =>
+            string.Join(" [yellow]-[/] ", shifts.GetSlices(2).Select(shift =>
             {
                 var leftStr = $"{shift[0]} ";
                 var rightStr = shift.Length > 1 ? $"- {shift[1]}" : "...";
